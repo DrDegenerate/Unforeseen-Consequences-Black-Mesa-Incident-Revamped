@@ -1,0 +1,25 @@
+USA_add_or_modify_black_mesa = {
+	IF = {
+		limit = {
+			NOT = { has_dynamic_modifier = { modifier = USA_black_mesa_modifier } }
+		}
+		custom_effect_tooltip = USA_add_black_mesa_modifier_tt
+		hidden_effect = { add_dynamic_modifier = { modifier = USA_black_mesa_modifier } }
+	}
+	ELSE = {
+		custom_effect_tooltip = USA_modify_black_mesa_modifier_tt
+	}
+}
+
+USA_add_or_modify_black_mesa_incident = {
+	IF = {
+		limit = {
+			NOT = { has_dynamic_modifier = { modifier = USA_black_mesa_incident_modifier } }
+		}
+		custom_effect_tooltip = USA_add_black_mesa_incident_modifier_tt
+		hidden_effect = { add_dynamic_modifier = { modifier = USA_black_mesa_incident_modifier } }
+	}
+	ELSE = {
+		custom_effect_tooltip = USA_modify_black_mesa_incident_modifier_tt
+	}
+}

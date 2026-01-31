@@ -1,0 +1,2828 @@
+###########################
+# USA Events (Added here to overwrite and prevent old code, for demonstration purposes)
+###########################
+
+add_namespace = usa
+
+# Cascade resonance
+
+# equipment malfunction
+
+country_event = {
+	id = usa.1
+	title = "usa.1.t"
+	desc = "usa.1.d"
+	picture = GFX_resonance
+	
+	is_triggered_only = no
+	fire_only_once = yes
+	trigger = {
+		has_country_flag = neveruse
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = { 
+				id = usa.2 
+				days = 4 
+			} 
+		}
+	}
+	option = {
+		name = "usa.1.a"
+        add_political_power = -10 
+		USA = {
+		set_country_flag = resonance_cascade_init #client_ping crash in 2001 still present?
+		set_country_flag = rc_chainevent
+		}
+
+	}
+}
+# cascade resonance
+
+country_event = {
+	id = usa.2
+	title = "usa.2.t"
+	desc = "usa.2.d"
+	picture = GFX_Resonance_Cascade_Aftermath
+	
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = rc_chainevent # -> change to resonance_cascadeSE later on
+	}
+
+	immediate = {
+	    hidden_effect = {
+		
+		USA = {
+			add_research_slot = -1
+			set_country_flag = resonance_cascade_init
+			load_oob = "USA_HECU_OOB"
+		}
+		985 = {
+			set_demilitarized_zone = yes
+		}
+		XEN = {
+			transfer_state = 376
+				}
+			}
+		}
+
+	option = {
+		name = usa.2.a
+		USA = {
+			add_manpower = -13240
+			add_political_power = -25
+			#fix OOB spawn
+			hidden_effect = {
+				#complete_national_focus = USA_unintended_consequences
+				country_event = { 
+					id = usa.3 
+					hours = 2
+				}
+				country_event = superevents.002 
+				country_event = usa.117
+			}
+		}
+	}
+}
+
+#Black Mesa is Covering up a Sinkhole! Hunt Down / Forget Freeman
+
+country_event = {
+	id = usa.3
+	title = usa.3.t
+	desc = usa.3.d
+	picture = GFX_black_mesa_sinkhole
+	
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = { USA = { set_country_flag = freeman } }
+	option = {
+		name = "usa.3.a"
+		USA = {
+			add_manpower = -20000
+			add_political_power = 100
+		}
+		country_event = { 
+			id = usa.4 
+			hours = 15 
+		}
+	}
+	option = {
+		name = "usa.3.b"
+		country_event = {  
+			id = usa.4 
+			hours = 15 
+		}
+		hidden_effect = {
+		XEN = { transfer_state = 314
+			transfer_state = 489
+			transfer_state = 308
+			transfer_state = 968
+			transfer_state = 495 }
+			}
+		USA = {
+			add_stability = -0.01
+			add_war_support = -0.05
+			add_political_power = -100
+		}
+		ai_chance = { base = 50 }
+	}
+ }
+
+# black ops sent
+
+country_event = {
+	id = usa.4
+	title = "usa.4.t"
+	desc = "usa.4.d"
+	picture = GFX_CIA_CLASSIFIED
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	immediate = { 
+
+	}
+	option = { 
+		name = usa.4.a
+		USA = {
+			launch_nuke = { 
+				province = 13385
+			}
+			985 = { 
+				set_state_name = "Black Mesa Containment Zone"   
+			}			
+			country_event = { 
+				id = usa.6 
+				days = 35 
+			}							
+			hidden_effect = {
+				USA = { 
+					load_oob = "USA_blackops" 
+				}
+				set_province_name = { 
+					id = 13385 
+					name = "Black Mesa Ruins" 
+				}
+				goto_province = 13385
+				set_country_flag = USA_cascade
+				set_country_flag = USA_6_freeman
+				CAN = { 
+					declare_war_on = { 
+						target = XEN 
+						type = annex_everything 
+					}
+				}	
+		   		news_event = {
+                	id = news_combine.48
+               		days = 1 				
+				}
+				country_event = {
+					id = usa.116
+				}
+				USA = {
+					country_event = {
+						id = xencollapse.7
+						hours = 8
+					}
+					country_event = {
+						id = usa.23
+					}
+				}
+				XEN = { 
+					transfer_state = 314
+					transfer_state = 1039
+					transfer_state = 308
+					transfer_state = 968
+			  		division_template = {
+						name = "Headcrab Horde"
+						is_locked = no
+						division_cap = 25 
+						priority = 0
+						template_counter = 107
+							regiments = {
+							headcrab_infected = { x = 0 y = 0 }
+							headcrab_infected = { x = 0 y = 1 }
+							headcrab_infected = { x = 0 y = 2 }
+							headcrab_infected = { x = 0 y = 3 }
+							headcrab_infected = { x = 0 y = 4 }
+							headcrab_infected = { x = 1 y = 0 }
+							headcrab_infected = { x = 1 y = 1 }
+							headcrab_infected = { x = 1 y = 2 }
+							headcrab_infected = { x = 1 y = 3 }
+							headcrab_infected = { x = 1 y = 4 }
+						}
+					}
+				}
+			  # Random State Anarchy Spawn  #
+				random_state = {
+					limit = {
+						OR = {
+							is_owned_and_controlled_by = CAN
+							is_owned_and_controlled_by = USA
+							is_owned_and_controlled_by = MEX
+							NOT = {
+								state = 1082
+							}
+						}
+					}
+					transfer_state_to = XEN
+				}
+				random_state = {
+					limit = {
+						OR = {
+							is_owned_and_controlled_by = CAN
+							is_owned_and_controlled_by = MEX
+						}
+						NOT = {
+							state = 1082
+						}
+					}
+					transfer_state_to = XEN
+					create_unit = {
+						division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+						owner = XEN
+						count = 4
+						allow_spawning_on_enemy_provs = yes
+					}
+				}
+			}	
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = CAN
+						is_owned_and_controlled_by = USA
+						is_owned_and_controlled_by = MEX
+						NOT = {
+							state = 1082
+							state = 388
+							state = 389
+						}
+					}
+				}
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = PRU
+						is_owned_and_controlled_by = VEN
+						is_owned_and_controlled_by = BRA
+						NOT = {
+							state = 1082
+						}
+					}
+				}
+				transfer_state_to = XEN
+			}
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = CAN
+						is_owned_and_controlled_by = USA
+						is_owned_and_controlled_by = MEX
+						NOT = {
+							state = 1082
+							state = 388
+							state = 389
+						}
+					}
+				}
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = MEX
+					}
+					NOT = {
+						state = 1082
+					}
+				}
+				transfer_state_to = XEN
+			}
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = USA
+					}
+				}
+				transfer_state_to = XEN	
+			}
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = CAN
+					}
+				}
+				transfer_state_to = XEN
+			}				
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = BRA
+					}
+				}
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+		}
+	}
+	#set_global_flag = Gordon_Freeman_In_Stasis
+}
+# hunt the freeman
+
+country_event = {
+	id = usa.5
+	title = "usa.5.t"
+	desc = "usa.5.d"
+	picture = GFX_HECU_Withdraw
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = USA_6_freeman
+	}
+	
+	mean_time_to_happen = {
+		days = 3
+	}
+	
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_owned_and_controlled_by = WST
+				}
+				set_demilitarized_zone = yes
+			}
+		}
+	}
+	
+	option = {
+		name = "usa.5.a"
+		USA = {
+			add_manpower = -45000
+			add_war_support = -0.01
+			add_stability = -0.01
+		}
+		country_event = {
+        	id = usa.4
+        	hours = 2
+        }
+	}
+}
+
+# crisis usa
+
+country_event = {
+	id = usa.6
+	title = "usa.6.t"
+    desc = "usa.6.d"
+	picture = GFX_USA_PortalStorms
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+	has_country_flag = resonance_cascade_init
+	}
+
+	immediate = {
+
+	}
+
+	option = {
+		hidden_effect = {
+			USA = {
+				country_event = { 
+					id = usa.9
+					random_days = 10 
+				}
+				country_event = { 
+					id = usa.19 
+					days = 14 
+				}
+			}
+		}
+		name = "usa.6.a"
+		add_stability = -0.02
+		add_war_support = -0.05
+		add_ideas = {
+			xen_creatures_1
+			population_loss_1
+		}
+
+		hidden_effect = {
+		division_template = {
+					name = "Headcrab Horde"
+					is_locked = no
+					division_cap = 25 
+					priority = 0
+					template_counter = 107
+					regiments = {
+						headcrab_infected = { x = 0 y = 0 }
+						headcrab_infected = { x = 0 y = 1 }
+						headcrab_infected = { x = 0 y = 2 }
+						headcrab_infected = { x = 0 y = 3 }
+						headcrab_infected = { x = 0 y = 4 }
+						headcrab_infected = { x = 1 y = 0 }
+						headcrab_infected = { x = 1 y = 1 }
+						headcrab_infected = { x = 1 y = 2 }
+						headcrab_infected = { x = 1 y = 3 }
+						headcrab_infected = { x = 1 y = 4 }
+					}
+				}
+					random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = BRA
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+										}
+																		
+																			
+										
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = MEX
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+				}
+										
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = FRA
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+				}
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = FRA
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+				}
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = ITA
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+																			division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+																			owner = XEN
+																			count = 12
+																			allow_spawning_on_enemy_provs = yes
+																			id = 500
+																			}
+										}
+										
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = UKR
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+																			division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+																			owner = XEN
+																			count = 12
+																			allow_spawning_on_enemy_provs = yes
+																			id = 500
+																			}
+										}
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = TUR
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+																			division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+																			owner = XEN
+																			count = 12
+																			allow_spawning_on_enemy_provs = yes
+																			id = 500
+																			}
+										}
+										random_state = {
+											limit = {
+											OR = {
+												is_owned_and_controlled_by = TUR
+												}
+											}
+											transfer_state_to = XEN
+												create_unit = {
+																			division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+																			owner = XEN
+																			count = 12
+																			allow_spawning_on_enemy_provs = yes
+																			id = 500
+																			}
+										}
+										
+			
+			XEN = { 	
+				declare_war_on = {
+                    target = BRA
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = PRU
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = SWI
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = AUS
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = GUA
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = HON
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = NIC
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = VEN
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = COL
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = UKR
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = TUR
+                    type = annex_everything
+                }
+				declare_war_on = {
+                    target = SAU
+                    type = annex_everything
+                }
+			}
+										
+			XEN = { 	
+				declare_war_on = { target = BRA type = annex_everything }
+				declare_war_on = { target = PRU type = annex_everything }
+				declare_war_on = { target = GUA type = annex_everything }
+				declare_war_on = { target = HON type = annex_everything }
+				declare_war_on = { target = NIC type = annex_everything }
+				declare_war_on = { target = VEN type = annex_everything }
+				declare_war_on = { target = COL type = annex_everything }
+				declare_war_on = { target = ECU type = annex_everything }
+				declare_war_on = { target = ARG type = annex_everything }
+				declare_war_on = { target = PAR type = annex_everything }
+				declare_war_on = { target = URG type = annex_everything }
+				declare_war_on = { target = BOL type = annex_everything }
+				declare_war_on = { target = CHL type = annex_everything }
+				declare_war_on = { target = SUR type = annex_everything }
+				declare_war_on = { target = GYA type = annex_everything }
+			}
+				
+			# Brasil
+			random_state = {
+				limit = { is_owned_and_controlled_by = BRA }
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 3
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+
+			# Perú
+			random_state = {
+				limit = { is_owned_and_controlled_by = PRU }
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 3
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+
+			# Colombia
+			random_state = {
+				limit = { is_owned_and_controlled_by = COL }
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 2
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+
+			# Argentina
+			random_state = {
+				limit = { is_owned_and_controlled_by = ARG }
+				transfer_state_to = XEN
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+			}			
+
+		}
+	}
+}	
+# Aperture Science incident
+#Needs writing
+country_event = {
+	id = usa.7
+	title = "usa.7.t"
+    desc = "usa.7.d"
+	picture = GFX_resonance
+	is_triggered_only = yes
+	hidden = no
+	fire_only_once = yes
+	trigger = {
+		tag = USA
+		date > 2000.05.02
+		NOT = {
+		has_country_flag = USA_aperture_incident
+		}
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+	option = {
+		name = "usa.7.a"
+		add_political_power = -25
+		set_country_flag = USA_aperture_incident
+	}
+}
+
+# Election of USA
+
+country_event = {
+	id = usa.8
+	title = "usa.8.t"
+    desc = "usa.8.d"
+	picture = GFX_resonance
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+		date > 2000.11.01
+		has_start_date < 2000.01.02 
+	    has_start_date > 2000.01.01 
+		NOT = {
+			has_country_flag = USA_election2000
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = { set_country_flag = USA_election2000 complete_national_focus = USA_new_president }
+	
+	option = {
+		name = "usa.8.a"
+		set_country_flag = bush_victory
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = USA_bush_victory
+		hidden_effect = {
+			add_popularity = {
+				ideology = conservatism
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_liberalism
+				popularity = -0.05
+			}
+		}
+	}
+	
+	option = {
+		name = "usa.8.b"
+		set_country_flag = al_gore_victory
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = USA_gore_victorious
+	}
+}
+
+# Usa general staff meeting
+
+country_event = {
+	id = usa.9
+	title = usa.9.t
+    desc = usa.9.d
+	picture = GFX_resonance
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		XEN = {
+			num_occupied_states > 5
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 5
+	}
+	
+	immediate = {
+	
+											
+	}
+	
+	option = {
+		name = usa.9.a
+		hidden_effect = {
+			XEN = {
+				transfer_state = 1059
+				transfer_state = 376
+				transfer_state = 1052
+				transfer_state = 1038
+				transfer_state = 1076
+				transfer_state = 483
+			
+                division_template = {
+					name = "Xen Creatures"
+					is_locked = no
+					division_cap = 12 
+					priority = 0
+					template_counter = 6
+					regiments = {
+						headcrab_infected = { x = 0 y = 0 }
+						headcrab_infected = { x = 0 y = 1 }
+						headcrab_infected = { x = 0 y = 2 }
+						headcrab_infected = { x = 0 y = 3 }
+						vortigaunts_xen = { x = 0 y = 4 }
+						vortigaunts_xen = { x = 1 y = 0 }
+						vortigaunts_xen = { x = 1 y = 1 }
+						vortigaunts_xen = { x = 1 y = 2 }
+						vortigaunts_xen = { x = 1 y = 3 }
+						vortigaunts_xen = { x = 1 y = 4 }
+					}
+				}	
+				declare_war_on = {
+                    target = USA
+                    type = annex_everything
+                }
+			}
+			376 = {
+				create_unit = {
+					division = "name = \"Xenian Creatures\" division_template = \"Xen Creatures\" start_manpower_factor = 1"
+					owner = XEN
+					count = 16
+					allow_spawning_on_enemy_provs = yes
+					prioritize_location = 4975
+ 					id = 1001
+				}
+			}
+			every_state = {
+				limit = { is_owned_by = XEN }
+				set_building_level = { type = quarantinezone level = 1 }
+			}
+		}
+		
+		
+	}
+}
+# Future of America
+#AMA
+country_event = {
+	id = usa.10
+	title = "usa.10.t"
+    desc = "usa.10.d"
+	picture = GFX_resonance
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.10.a"
+		set_country_flag = USA_onourown
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+	option = {
+		name = "usa.10.b"
+		set_country_flag = USA_unitedbystruggles
+		mark_focus_tree_layout_dirty = yes
+	}
+	
+}
+
+# Arrival of refugees
+#AMA
+country_event = {
+	id = usa.11
+	title = "usa.11.t"
+    desc = "usa.11.d"
+	picture = GFX_resonance
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.11.a"
+		add_stability = 0.05
+		add_manpower = 3500
+		1000 = {
+		add_manpower = 15000
+		}
+	}
+	
+	option = {
+		name = "usa.11.b"
+		add_stability = -0.05
+	}
+	
+}
+
+# HECU formation
+#AMA
+country_event = {
+	id = usa.12
+	title = "usa.12.t"
+    desc = "usa.12.d"
+	picture = GFX_resonance
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.11.a"
+		add_stability = 0.05
+		add_manpower = 3500
+		1000 = {
+		add_manpower = 15000
+		}
+		USA = {
+			#load_oob = "USA_HECU_OOB"
+		}
+	}
+	
+	option = {
+		name = "usa.11.b"
+		add_stability = -0.02
+	}
+	
+}
+
+country_event = {
+	id = usa.13
+	title = "usa.13.t"
+    desc = "usa.13.d"
+	picture = GFX_alien
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.13.a"
+
+		add_war_support =  0.01
+	}
+	
+}
+
+country_event = {
+	id = usa.14
+	title = "usa.14.t"
+    desc = "usa.14.d"
+	picture = GFX_air_force
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = "usa.14.a"
+		add_tech_bonus = {
+    		bonus = 0.90
+    		uses = 1
+    		category = light_fighter
+		}
+	}
+	option = {
+		name = "usa.14.b"
+		add_tech_bonus = {
+    		bonus = 0.90
+    		uses = 1
+    		category = helicopters
+		}
+	}	
+}
+country_event = {
+	id = usa.15
+	title = "usa.15.t"
+    desc = "usa.15.d"
+	picture = GFX_Air_Base
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+		
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.15.a"
+
+		add_political_power = 10
+	}
+	
+}
+
+country_event = {
+	id = usa.16
+	title = usa.16.t
+    desc = usa.16.d
+	picture = GFX_USA_PortalStorms
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+		
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = usa.16.a
+
+		add_political_power = 10
+	}
+	
+}
+
+country_event = {
+	id = usa.17
+	title = "usa.17.t"
+    desc = "usa.17.d"
+	picture = GFX_black_mesa_more_money
+
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.17.a"
+
+		add_political_power = 10
+	}
+	
+}
+
+country_event = {
+	id = usa.18
+	title = "usa.18.t"
+    desc = "usa.18.d"
+	picture = GFX_Xen_recon
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "usa.18.a"
+
+		add_political_power = 10
+	}
+}
+country_event = {
+	id = usa.19
+	title = usa.19.t
+    desc = usa.19.d
+	picture = GFX_xen_spread
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = resonance_cascade_init
+		tag = USA
+		XEN = {
+			controls_state = 1077
+		}
+	}
+	mean_time_to_happen = {
+		days = 3
+	}
+	
+	immediate = {
+		hidden_effect = {
+			NCT = { declare_war_on = { target = USA type = annex_everything } }
+			every_state = {
+				limit = { is_owned_by = ANR }
+				set_building_level = {
+					type = ruinedinfrastructure
+					level = 1
+				}
+			}
+			USA = {
+				country_event = {
+					id = usa.22
+					days = 1
+				}
+			}
+			every_state = {
+				limit = { is_owned_by = XEN }
+				set_building_level = {
+					type = quarantinezone
+					level = 1
+				}
+				set_building_level = {
+					type = ruinedinfrastructure
+					level = 1
+				}
+			}
+			USA = { load_oob = "USA_refugees_florida" }
+		}
+	}
+	
+	option = {
+		name = "usa.19.a"
+		hidden_effect = {
+		366 = {
+		set_building_level = {
+			type = infrastructure
+			level = 1
+		}
+		set_building_level = {
+			type = ruinedinfrastructure
+			level = 1
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.20
+	title = usa.20.t
+    desc = usa.20.d
+	picture = GFX_SOCOM_investment
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = usa.20.a
+		set_country_flag = USA_USASOC_investments
+		add_unit_bonus = {
+			category_special_forces = {
+				soft_attack = 0.05
+				hard_attack = 0.15
+				air_defence = 0.10
+			}
+		}
+	}
+	option = {
+		name = usa.20.b
+		set_country_flag = USNA_NSWC_investments
+		add_unit_bonus = {
+			category_special_forces = {
+				breakthrough = 0.10
+				supply_consumption_factor = -0.10
+				initiative_factor = 0.15
+			}
+		}
+	}
+	option = {
+		name = usa.20.c
+		set_country_flag = USAF_AFSOC_investment
+		add_unit_bonus = {
+			category_special_forces = {
+				supply_consumption_factor = -0.25
+				recon = 0.05
+				recovery = 0.15
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.21
+	title = usa.21.t
+    desc = usa.21.d
+	picture = GFX_xen_expeditions
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+	}
+	immediate = {
+	}
+	
+	option = {
+		name = usa.21.a
+		set_country_flag = 24th_invest
+	}
+	option = {
+		name = usa.21.b
+		set_country_flag = armed_predator_invest
+	}
+	option = {
+		name = usa.21.c
+		set_country_flag = DIA_cooperation
+	}
+	option = {
+		name = usa.21.d
+		set_country_flag = SBIRS_investment
+	}
+}
+country_event = {
+	id = usa.22
+	title = usa.22.t
+	desc = usa.22.d
+	picture = GFX_xen_battlefield
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.22.a
+		add_political_power = -10
+		army_experience = 15
+		add_command_power = 10
+
+		USA = {
+			country_event = {
+				id = usa.24
+				days = 5
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.23
+	title = usa.23.t
+	desc = usa.23.d
+	picture = GFX_black_mesa_destroyed
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.23.a
+		add_manpower = -3400	
+	}
+}
+country_event = {
+	id = usa.24
+	title = usa.24.t
+	desc = usa.24.d
+	picture = GFX_new_xen_fauna
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.24.a
+		add_stability = -0.5
+	}
+}
+country_event = {
+	id = usa.25
+	title = usa.25.t
+	desc = usa.25.d
+	picture = GFX_xen_in_sewers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+
+	}
+
+	immediate = {
+		hidden_effect = {
+			add_stability = -0.01
+		}
+	}
+
+	option = {
+		name = usa.25.a
+	}
+}
+country_event = {
+	id = usa.26
+	title = usa.26.t
+	desc = usa.26.d
+	picture = GFX_test
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = usa.26.a
+		add_stability = -0.02
+		add_political_power = -15
+	}
+}
+country_event = {
+	id = usa.27
+	title = usa.27.t
+	desc = usa.27.d
+	picture = GFX_usa_7_hours_war_1
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = usa.27.a
+	}
+}
+country_event = {
+	id = usa.28
+	title = usa.28.t
+	desc = usa.28.d
+	picture = GFX_usa_7_hours_war_2	
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.28.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1000
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 600
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_weapons_1
+			amount = 500
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment_1
+			amount = 200
+		}
+	}
+}
+country_event = {
+	id = usa.29
+	title = usa.29.t
+	desc = usa.29.d
+	picture = GFX_USA_bush_congress
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.29.a
+		add_stability = 0.01
+		add_popularity = {
+   		 	ideology = conservatism
+    		popularity = 0.01
+		}		
+	}
+	option = {
+		name = usa.29.b
+		add_stability = -0.01
+		add_popularity = {
+   			ideology = social_liberalism
+    		popularity = 0.01
+		}				
+	}
+
+}
+country_event = {
+	id = usa.30
+	title = usa.30.t
+	desc = usa.30.d
+	picture = GFX_special_air_service_regiment
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.30.a
+	}
+}
+country_event = {
+	id = usa.31
+	title = usa.31.t
+	desc = usa.31.d
+	picture = GFX_Air_Assault_Brigade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name =  usa.31.a
+	}
+}
+country_event = {
+	id = usa.32
+	title = usa.32.t
+	desc = usa.32.d
+	picture = GFX_1st_Foreign_Regiment
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = usa.32.a
+	}
+}
+country_event = {
+	id = usa.33
+	title = usa.33.t
+	desc = usa.33.d
+	picture = GFX_Guangxi_Motor_Brigade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = usa.33.a
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = usa.113
+					days = 2
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.34
+	title = usa.34.t
+	desc = usa.34.d
+	picture = GFX_NORAD_reinforce
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.34.a
+		1081 = {
+			add_building_construction = {
+   				type = radar_station
+    			level = 4
+    			instant_build = yes
+				province = 13427
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.35
+	title = usa.35.t
+	desc = usa.35.d
+	picture = GFX_USA_study_combine_tech
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = usa.35.a
+	}
+}
+country_event = {
+	id = usa.39
+	title = usa.39.t
+	desc = usa.39.d
+	picture = GFX_the_cheyenne_complex
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.39.a
+		USA = {
+			hidden_effect = {
+				retire_character = USA_Freddy_McFarren
+		   		set_politics = {
+			   		ruling_party = despotism
+			    	elections_allowed = no
+		    	}
+				set_popularities = {
+					despotism = 100
+				}
+				set_country_leader = {
+					id = USA_freddy_McFarren2
+				}
+			}
+			country_event = {
+				id = usa.44
+				days = 5
+			}		
+		}				
+	}
+}
+country_event = {
+	id = usa.40
+	title = usa.40.t
+	desc = usa.40.d
+	picture = GFX_usa_pre_seven_hours_war
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		COM = {
+			has_completed_focus = com_scout_planet
+			has_completed_focus = com_teleportation_routes
+			has_completed_focus = com_utilize_portal_storms
+		}
+	}
+
+	option = {
+		name = usa.40.a
+	}
+}
+country_event = {
+	id = usa.41
+	title = usa.41.t
+	desc = usa.41.d
+	picture = GFX_escape_of_the_president
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = usa.42
+					days = 1
+				}
+			}	
+		}
+	}
+	option = {
+		name = usa.41.a
+		add_stability = -0.05
+		add_political_power = -15
+	}
+}
+country_event = {
+	id = usa.42
+	title = usa.42.t
+	desc = usa.42.d
+	picture = GFX_angels_and_devil
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.42.a
+		USA = {
+			country_event = {
+				id = usa.43
+				days = 5
+			}
+			add_political_power = 10
+			transfer_state = 1020
+		}
+	}
+}
+### The President arrives in Colorado
+country_event = {
+	id = usa.43
+	title = usa.43.t
+	desc = usa.43.d
+	picture = GFX_president_arrive_colorado
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			USA = {
+				set_country_flag = president_in_colorado
+			}
+		}
+	}
+
+	option = {
+		name = usa.43.a
+	}
+}
+### California Nuked lol
+country_event = {
+	id = usa.44
+	title = usa.44.t
+	desc = usa.44.d
+	picture = GFX_california_in_chaos
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.44.a
+		add_stability = -0.05
+		launch_nuke = { 
+			province = 4607
+		}
+	}
+}
+country_event = {
+	id = usa.45
+	title = usa.45.t
+    desc = usa.45.d
+	picture = GFX_bmrf
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		USA = {
+			has_country_flag = resonance_cascade_init
+		}
+	}
+	option = {
+		name = usa.45.a
+		set_country_flag = ddz_expansion
+		custom_effect_tooltip = loadRCtree.02.tt
+		USA = {
+			load_focus_tree = usa_cascade_tree
+		country_event = {
+			id = usa.46
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.46
+	title = usa.46.t
+    desc = usa.46.d
+	picture = GFX_military_assets
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		has_country_flag = ddz_expansion
+	}
+	immediate = {
+		hidden_effect = { 
+			country_event = {
+				id = xencollapse.21 #Xen Spawns, middle east, Africa, west Europe, needs a news event
+				days = 55
+			}
+		}
+	}
+	option = {
+		name = "usa.46.a"
+		USA = {
+			set_stability = 0.05
+			add_war_support = -0.01
+		}
+		hidden_effect = {
+			load_oob = "USA_RC_Response"
+			country_event = xencollapse.22
+			USA = {
+				add_equipment_to_stockpile = { #for missle defense unit
+					type = rocket_artillery_equipment_1
+					amount = 300
+				}
+
+			}
+		}
+		custom_effect_tooltip = usa.46.tt
+	}
+	option = {
+		name = "usa.46.b"
+		custom_effect_tooltip = usa46b.tt
+		hidden_effect = { 
+			DDZ = {
+				every_state = {
+					limit = {
+						region = 219
+						NOT = {
+							is_controlled_by = XEN
+							is_controlled_by = WST
+						}
+					}
+					transfer_state_to = DDZ 
+				}
+				every_state = {
+					limit = {
+						region = 119 
+						NOT = {
+							is_controlled_by = XEN
+							is_controlled_by = WST
+						}
+					}
+					transfer_state_to = DDZ 
+				}
+				country_event = xencollapse.22 #equipment spawn
+
+				add_ideas = USA_fractured_command_DDZ
+				declare_war_on = {
+					target = XEN
+					type = liberate_wargoal
+				}
+			}
+			DDZ = {
+				transfer_state = 1017
+				transfer_state = 1021
+				transfer_state = 1000
+				transfer_state = 1024
+				transfer_state = 1021
+				transfer_state = 1017
+				transfer_state = 1025
+				transfer_state = 1065
+				transfer_state = 1064
+				transfer_state = 1066
+				transfer_state = 1022
+				transfer_state = 1073
+				transfer_state = 1074
+				transfer_state = 1019
+				transfer_state = 1063
+			}
+			USA = {
+				add_to_faction = DDZ
+			}  
+		}
+	}
+}
+country_event = {
+	id = usa.47
+	title = usa.47.t
+    desc = usa.47.d
+	picture = GFX_HECU_Withdraw
+	
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = usa.47.a
+
+		add_political_power = 10
+	}
+	
+}
+country_event = {
+	id = usa.48
+	title = usa.48.t
+    desc = usa.48.d
+	picture = GFX_AnimatedCascadeResonance_frame_2
+
+	is_triggered_only = yes
+	
+	hidden = no
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+	
+	option = {
+		name = "Cover it up!"
+		add_political_power = -10
+	}
+	
+}
+
+### Focus Events
+country_event = {
+	id = usa.49
+	title = usa.49.t
+    desc = usa.49.d
+	picture = GFX_national_guard
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	
+	immediate = {
+	}
+	
+	option = {
+		name = usa.49.a
+		add_political_power = -25
+		add_timed_idea = {
+			idea = NG_recruitment_boon
+			days = 180
+		}
+	}
+
+	option = {
+		name = usa.49.b
+		add_political_power = 15
+	}	
+}
+
+country_event = {
+	id = usa.50
+	title = usa.50.t
+    desc = usa.50.d
+	picture = GFX_usa_abrams
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	
+	immediate = {
+	}
+	
+	option = {
+		name = usa.50.a
+		army_experience = -15
+	hidden_effect = {
+		add_equipment_to_stockpile = {
+			type = mechanized_equipment_1
+			amount = 500
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_fight_vehicle
+			amount = 850
+		}
+	}
+		add_tech_bonus = {
+    		bonus = 1.0
+    		uses = 1
+    		technology = IFV_3
+		}
+		add_timed_idea = {
+			idea = USA_stryker_program
+			days = 180
+		}
+		add_units_to_division_template = {
+			template_name = "LCD Armor Division"
+			regiments = {
+				infantry_fight_vehicle = 2
+			}
+		}
+		add_units_to_division_template = {
+			template_name = "LCD Armor Division"
+			regiments = { #needs to be updated with modern unit types later on
+				infantry_fight_vehicle = 2
+			}
+		}
+	}
+
+	option = {
+		name = usa.50.b
+		army_experience = -20
+		hidden_effect = {
+			add_equipment_to_stockpile = {
+				type = modern_tank_equipment_1
+				amount = 400
+			}
+		}
+		add_timed_idea = {
+			idea = USA_tank_modernization
+			days = 270
+		}
+		add_tech_bonus = {
+    		bonus = 1.0
+    		uses = 1
+    		technology = main_battle_tank2
+		}			
+		add_units_to_division_template = {
+			template_name = "LCD Armor Division"
+			regiments = {
+				modern_armor = 2 #needs to be updated with modern unit types later on
+				modern_sp_artillery_brigade = 1 #fix me later
+			}
+		}
+		add_units_to_division_template = {
+			template_name = "Mechanized Infantry"
+			regiments = {
+				modern_armor = 2 #needs to be updated with modern unit types later on
+			}
+		}
+	}
+}
+
+country_event = {
+	id = usa.51
+	title = usa.51.t
+	desc = usa.51.d
+	picture = GFX_aperture_science_disappears
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		has_completed_focus = USA_investigate_disappearences
+		tag = USA
+	}
+	
+	immediate = { }
+	
+	option = {
+		name = usa.51.a
+		
+		hidden_effect = {
+			set_country_flag = USA_coverup # when removed, it gives -50% debuff
+		}
+		swap_ideas = {
+			add_idea = USA_disappearances_covered_up
+			remove_idea = USA_disappearances
+		}
+		
+		custom_effect_tooltip = usa.51.tooltip.a
+	}
+	
+	option = {
+		name = usa.51.b
+		
+		swap_ideas = {
+			add_idea = USA_silent_investigation
+			remove_idea = USA_disappearances
+		}
+	}
+	
+	option = {
+		name = usa.51.c
+		
+		swap_ideas = {
+			add_idea = USA_disappearances_investigation
+			remove_idea = USA_disappearances
+		}
+	}
+}
+
+country_event = {
+	id = usa.52
+	title = usa.52.t
+	desc = usa.52.d
+	picture = GFX_portal_generic_image
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	hidden = no
+	
+	trigger = {
+		tag = USA
+	}
+	
+	immediate = { }
+	
+	option = {
+		name = usa.52.a
+		
+		add_ideas = { USA_disappearances }
+		swap_ideas = {
+			add_idea = aperture_science_3_both
+			remove_idea = aperture_science_4
+		}
+	}
+}
+
+country_event = {
+	id = usa.53
+	title = usa.53.t
+	desc = usa.53.d
+	picture = GFX_USA_IBA
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	hidden = no
+	
+	trigger = {
+		tag = USA
+		has_completed_focus = USA_form_newguard
+	}
+	
+	immediate = { }
+	
+	option = {
+		name = usa.53.a
+		USA = {
+		add_unit_bonus = {
+			infantry = {
+				defense = 0.05
+				movement = -0.02
+				casualty_trickleback = 0.05
+				}
+			}
+		}
+	}
+	option = {
+		name = usa.53.b
+		USA = {
+			add_unit_bonus = {
+				infantry = {
+					defense = 0.075
+					movement = 0.02
+				}
+			}
+		}
+	}
+	option = {
+		name = usa.53.c
+		USA = {
+			add_unit_bonus = {
+				infantry = {
+					recon = 0.05
+					initiative = 0.05
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = usa.54
+	title = usa.54.t
+	desc = usa.54.d
+	# picture = ADD PLEASE
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	hidden = yes
+	
+	trigger = {
+		tag = USA
+	}
+	
+	immediate = { 
+
+	}
+}
+
+country_event = {
+    id = usa.55
+    picture = GFX_USA_army55
+    title = usa.55.t
+    desc = usa.55.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		has_completed_focus = USA_usa_army
+	}
+    option = {
+      name = usa.55.a
+	  army_experience = 15
+	}
+}
+
+country_event = {
+    id = usa.56
+    picture = GFX_USA_ToSeas
+    title = usa.56.t
+    desc = usa.56.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		has_completed_focus = USA_navy
+	}
+    option = {
+      name = usa.56.a
+	  navy_experience = 15
+    }
+}
+
+country_event = {
+    id = usa.57
+    picture = GFX_USA_black_mesa_shithole
+    title = usa.57.t
+    desc = usa.57.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		
+	}
+    option = {
+      name = usa.57.a
+	  add_tech_bonus = { bonus = 0.5 uses = 1 category = industry }
+    }
+}
+
+country_event = { #USA_anomalous_materials_lab_expansions
+    id = usa.58
+    picture = GFX_ALMS
+    title = usa.58.t
+    desc = usa.58.d
+	fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+		name = usa.58.a
+		custom_effect_tooltip = "This will improve the experiments."
+    }
+}
+
+country_event = { #USA_entrusting_drbreen
+    id = usa.59
+    picture = GFX_wallace_man
+    title = usa.59.t
+    desc = usa.59.d
+	fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+		name = usa.59.a
+		custom_effect_tooltip = "Dr. Breen will make sure the experiment is carried out no matter what."
+    }
+}
+
+country_event = { #USA_fund_facility_expansions
+    id = usa.60
+    picture = GFX_freeman_first_and_last_job
+    title = usa.60.t
+    desc = usa.60.d
+	fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+		name = usa.60.a
+		custom_effect_tooltip = "Used to expand facility operations"
+		set_technology = {
+    		improved_computing_machine = 1
+		}
+    }
+}
+
+country_event = { #USA_USA_ToSeas
+	id = usa.104
+	picture = GFX_new_infantry
+	title = usa.104.t
+	desc = usa.104.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = usa.104.a
+		add_political_power = 50
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_manpower = 20000
+		add_tech_bonus = {
+    		bonus = 1.0
+    		uses = 1
+    		technology = anti_tank_weapons_2
+		}
+		add_tech_bonus = {
+    		bonus = 1.0
+    		uses = 1
+    		technology = anti_air_weapons_2
+		}				
+	}
+}
+
+country_event = {
+    id = usa.61
+    picture = GFX_USA_army55
+    title = usa.61.t
+    desc = usa.61.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		
+	}
+    option = {
+      name = usa.61.a
+	 
+    }
+}
+country_event = {
+	id = usa.62
+	title = usa.62.t
+	desc = usa.62.d
+	picture = GFX_freeman
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = usa.62.a
+	}			
+}
+
+country_event = {
+	id = usa.63
+	picture = GFX_INTERPLANETARY_INVASION
+	title = usa.63.t
+	desc = usa.63.d
+	fire_only_once = yes
+	is_triggered_only = yes
+
+    trigger = {
+
+	}
+	mean_time_to_happen = {
+		days = 3
+	}	
+	option = {
+		name = usa.63.a
+	}
+}
+
+country_event = {  #after the event of the surrender of the earth. put later#
+	id = usa.64
+	picture = GFX_usa_surrender
+	title = usa.64.t
+	desc = usa.64.d
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	option = {
+		name = usa.64.a
+		set_country_flag = USA_surrendered_to_combine
+	}
+}
+country_event = {
+	id = usa.65
+	title = usa.65.t
+	desc = usa.65.d
+	picture = GFX_nato_new_members
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			USA = {
+				add_to_faction = SLO
+				add_to_faction = LIT
+				add_to_faction = LAT
+				add_to_faction = EST
+				add_to_faction = ROM
+				add_to_faction = BUL
+				add_to_faction = SLV
+			}
+		}
+	}
+	option = {
+		name = usa.65.a
+	}
+}
+country_event = {
+	id = usa.66
+	title = usa.66.t
+	desc = usa.66.d
+	picture = GFX_austria_and_swiss_join_nato
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			USA = {
+				add_to_faction = AUS
+				add_to_faction = SWI
+			}
+		}
+	}
+	option = {
+		name = usa.66.a
+	}
+}
+country_event = {
+	id = usa.67
+	title = usa.67.t
+	desc = usa.67.d
+	picture = GFX_usa_final_response
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = usa.67.a
+		complete_national_focus = USA_use_nuclear_weapon
+	}
+}
+country_event = {
+	id = usa.68
+	title = usa.68
+	desc = usa.68
+	picture = GFX_usa_last_weapon
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = usa.68.a
+		complete_national_focus = USA_use_nuclear_weapon
+	}
+}
+country_event = { ##demo event
+	id = usa.69
+	title = usa.69.t
+	desc = usa.69.d
+	picture = GFX_interloper_business_1
+
+	fire_only_once = no
+	is_triggered_only = yes
+
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    immediate = {
+	    set_global_flag = interloper_black_mesa_investment
+    }	
+
+	option = {
+		name = usa.69.a
+		if = {
+			limit = { NOT = { has_completed_focus = USA_scientific_advancement } }
+			complete_national_focus = USA_scientific_advancement
+		}
+		complete_national_focus	= USA_additional_investition_to_black_mesa
+	}	
+}
+country_event = { ##demo event
+	id = usa.70
+	title = usa.70.t
+	desc = usa.70.d
+	picture = GFX_interloper_business_2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		custom_effect_tooltip = usa.70.tt
+		name = usa.70.a
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = usa.71
+					hours = 1
+				}
+			}
+		}
+	}
+}
+country_event = { ##demo event
+	id = usa.71
+	title = usa.71.t
+	desc = usa.71.d
+	picture = GFX_interloper_business_3
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		custom_effect_tooltip = usa.71.tt
+		add_stability = -0.05
+		name = usa.71.a
+		hidden_effect = {
+			complete_national_focus = USA_expand_experiments_with_crystals
+			complete_national_focus = USA_fund_facility_expansions
+		}
+	}
+	option = {
+		custom_effect_tooltip = usa.72.tt
+		name = usa.71.b
+		add_stability = -0.1
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = usa.126
+					days = 7
+				}
+			}
+		}
+	}	
+}
+###VICTOR GRAVES EVENTS###
+country_event = {
+    id = usa.110
+	title = usa.110.t
+	desc = usa.110.d
+	picture = GFX_victor_graves_0 
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+	    name = usa.110.a
+		ai_chance = { factor = 95 }
+		hidden_effect = {
+		    USA = { country_event = { id = usa.111 } }
+		}
+	}
+	mean_time_to_happen = {
+		days = 3
+	}	
+}
+
+country_event = {
+    id = usa.111
+	title = usa.111.t
+	desc = usa.111.d
+	picture = GFX_victor_graves_0 
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+	    name = usa.111.a
+		ai_chance = { factor = 95 }
+		hidden_effect = {
+		    USA = { country_event = { id = usa.112 } }
+		}		
+	}
+}
+
+country_event = {
+    id = usa.112
+	title = usa.112.t
+	desc = usa.112.d
+	picture = GFX_victor_graves_0 
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+	    name = usa.112.a
+		ai_chance = { factor = 95 }
+		recruit_character = USA_Victor_Graves
+		recruit_character = USA_Terry_Anderson
+	}
+}
+
+### RC Random Events 
+
+country_event = {
+	id = usa.113
+	title = usa.113.t
+	desc = usa.113.d
+	picture = GFX_chinese_soldiers_un
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = usa.113.a
+		add_manpower = 17000
+	}
+}
+
+
+
+###Resonance Cascade Other Events####
+
+country_event = {
+    id = usa.116
+	title = usa.116.t
+	desc = usa.116.d
+	picture = GFX_black_mesa_fall
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+	    name = usa.116.a
+		country_event = {
+			id = usa.118
+			}
+		ai_chance = { factor = 95 }
+		 
+	}
+}	
+
+country_event = {
+    id = usa.117
+	title = usa.117.t
+	desc = usa.117.d
+	picture = GFX_hecu_deploy
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			load_oob = "USA_HECU_RC"
+		}
+	}
+	option = {
+	    name = usa.117.a
+		ai_chance = { factor = 95 }
+		add_manpower = 20000
+	}
+}
+
+country_event = {
+    id = usa.118
+	title = usa.118.t
+	desc = usa.118.d
+	picture = GFX_hecu_deaths_high
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+	    name = usa.118.a
+		ai_chance = { factor = 95 }
+		add_manpower = -442
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = usa.119
+					hours = 12
+				}
+			}
+		}
+	}
+}
+
+country_event = { ###HECU The Grand Canyon Route 
+    id = usa.119
+	title = usa.119.t
+	desc = usa.119.d
+	picture = GFX_hecu_witdraw_but_with_heavy_casualities
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = the_mad_man
+	}
+	
+	option = {
+	    name = usa.119.a
+		ai_chance = { factor = 95 }
+		add_manpower = -2000
+	}
+}
+country_event = {
+    id = usa.120
+	title = usa.120.t
+	desc = usa.120.d
+	picture = GFX_black_mesa_fall
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	trigger = {
+	USA = {
+			has_country_flag = resonance_cascade_wasteland
+		}
+	}
+	mean_time_to_happen = {
+		days = 5
+	}	
+	option = {
+	    name = usa.120.a
+		ai_chance = { factor = 95 }
+		add_manpower = -35000
+		goto_province = 7315
+	
+		    AFA = { set_province_controller = 7315
+			
+					declare_war_on = {
+						target = XEN
+						type = liberate_wargoal
+					}
+					declare_war_on = {
+						target = USA
+						type = annex_everything
+					}
+					}
+		}	
+	}
+
+country_event = {
+    id = usa.121
+	title = usa.121.t
+	desc = usa.121.d
+	picture = GFX_black_mesa_fall
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	trigger = {
+		FLQ = {
+			has_capitulated = yes
+		}
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = usa.121.a
+		ai_chance = { factor = 95 }
+		add_manpower = -85000
+		goto_province = 12353
+		NCT = {
+			declare_war_on = {
+				target = USA
+				type = annex_everything
+			}
+		}
+	}
+}
+country_event = {
+    id = usa.122
+	title = usa.122.t
+	desc = usa.122.d
+	picture = GFX_black_mesa_crater
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag = resonance_cascade_init
+		USA = {
+			controls_province = 13385
+		}
+	}
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = usa.122.a
+		ai_chance = { factor = 95 }
+		add_stability = 0.05
+	}
+}
+country_event = {
+	id = usa.123 
+	title = usa.123.t
+	desc = usa.123.d
+	picture = GFX_gary_the_vortigaunt
+	trigger = {
+		has_country_flag = resonance_cascade_init
+		XEN = {
+			controls_state = 1022
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.123.a
+	}
+}
+country_event = {
+	id = usa.124
+	title = usa.124.t
+	desc = usa.124.d
+	picture = GFX_black_mesa_crater
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = usa.124.a
+	}
+}
+
+country_event = {
+	id = usa.125
+	title = usa.125.t
+	desc = usa.125.d
+	picture = GFX_florida_integration_to_us
+
+	fire_only_once = yes
+	hidden = no
+
+	trigger = {
+		USA = {
+			has_military_access_to = FLQ	
+		}
+		FLQ = {
+			NOT = {
+				has_war_with = NCT
+			}
+		}
+		country_exists = FLQ
+	}
+
+	option = {
+		name = usa.125.a
+
+		USA = {
+			annex_country = {
+				target = FLQ
+				transfer_troops = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = usa.126
+	title = usa.126.t
+	desc = usa.126.d
+	picture = GFX_florida_integration_to_us
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+
+	trigger = {
+	}
+
+	option = {
+		name = usa.125.a
+
+		USA = {
+			set_country_flag = usa1chain
+		}
+	}
+}
+

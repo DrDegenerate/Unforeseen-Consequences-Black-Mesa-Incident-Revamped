@@ -1,0 +1,1040 @@
+###########################
+# Revamped Invident Events
+###########################
+
+add_namespace = BMI
+
+# Resonance Cascade
+country_event = {
+	id = BMI.1
+	title = BMI.1.t
+	desc = BMI.1.d
+	picture = GFX_resonance
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.1.a
+		custom_effect_tooltip = usa_resonance_cascade_slow_down_tt
+
+        add_political_power = -10
+		
+		country_event = {
+			id = BMI.2
+			hours = 2
+		}
+
+	}
+}
+
+# HECU Arrives and reports situation
+country_event = {
+	id = BMI.2
+	title = BMI.2.t
+	desc = BMI.2.d
+	picture = GFX_Resonance_Cascade_Aftermath
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_country_flag = resonance_cascade_init
+		
+		hidden_effect = {
+			load_oob = "USA_HECU_OOB"
+		}
+	}
+
+	option = {
+		name = BMI.2.a
+
+		news_event = BMI_news.1
+		country_event = BMI.3
+
+		add_manpower = -100
+
+		hidden_effect = {
+			USA_add_or_modify_black_mesa = yes # reset all to zero
+			add_to_variable = { USA_black_mesa_consumer_goods_factor = -0.10 tooltip = consumer_goods_factor_tt} 
+			add_to_variable = { USA_black_mesa_political_power_gain = 0.15 tooltip = political_power_gain_tt} 
+			add_to_variable = { USA_black_mesa_research_speed_factor = -0.35 tooltip = research_speed_factor_tt} 
+			add_to_variable = { USA_black_mesa_nuclear_production_factor = -0.10 tooltip = nuclear_production_factor_tt} 
+			add_to_variable = { USA_black_mesa_military_factory_donations = -2 tooltip = military_factory_donations_tt} 
+			add_to_variable = { USA_black_mesa_intel_from_combat_factor = -0.05 tooltip = intel_from_combat_factor_tt}
+		}
+
+		remove_dynamic_modifier = { modifier = USA_black_mesa_modifier }
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.10 tooltip = political_power_gain_tt}
+	}
+}
+
+# Orders for the HECU
+country_event = {
+	id = BMI.3
+	title = BMI.3.t
+	desc = BMI.3.d
+	picture = GFX_Resonance_Cascade_Aftermath
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = { #Silence all witnesses
+		name = BMI.3.a
+		
+		set_country_flag = usa_silenced_witnesses
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_research_speed_factor = -0.2 tooltip = research_speed_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.05 tooltip = political_power_gain_tt}
+
+		country_event = BMI.4
+	}
+
+	#If I did a full revamp, this option would lead to a different route with different events and consequences.
+	#option = { #Rescue and detain all staff
+	#	name = BMI.3.b
+	#
+	#	set_country_flag = usa_rescued_scientists
+	#
+	#	#country_event = BMI.
+	#}
+}
+
+# Canon route - Where to focus?
+country_event = {
+	id = BMI.4
+	title = BMI.4.t
+	desc = BMI.4.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = { #Lambda Labs
+		name = BMI.4.a
+		
+		set_country_flag = usa_lambda_labs_focused
+
+		hidden_effect = {
+			country_event = { id = BMI.5 hours = 2 }
+		}
+
+		country_event = { id = BMI.6 hours = 6 }
+	}
+
+	option = { #Sector C
+		name = BMI.4.b
+		
+		set_country_flag = usa_sector_c_focused
+
+		country_event = { id = BMI.6 hours = 6 }
+	}
+}
+
+#Canon route - Breen secured
+country_event = {
+	id = BMI.5
+	title = BMI.5.t
+	desc = BMI.5.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.5.a
+	}
+}
+
+#Canon route - Xen hostilities increasing, Freeman emerges
+country_event = {
+	id = BMI.6
+	title = BMI.6.t
+	desc = BMI.6.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.6.a
+
+		add_manpower = -500
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.05 tooltip = political_power_gain_tt}
+		add_to_variable = { USA_black_mesa_incident_stability_factor = -0.05 tooltip = stability_factor_tt}
+
+		country_event = { id = BMI.7 hours = 3 }
+	}
+}
+
+#Canon route - rocket launched by Freeman
+country_event = {
+	id = BMI.7
+	title = BMI.7.t
+	desc = BMI.7.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.7.a
+
+		add_political_power = -50
+		add_manpower = -100
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.05 tooltip = political_power_gain_tt}
+		add_to_variable = { USA_black_mesa_incident_stability_factor = -0.05 tooltip = stability_factor_tt}
+
+		country_event = { id = BMI.8 hours = 2 }
+		news_event = BMI_news.2
+	}
+}
+
+#Canon route - Organized invasion by Xen
+country_event = {
+	id = BMI.8
+	title = BMI.8.t
+	desc = BMI.8.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.8.a
+
+		add_manpower = -1000
+
+		damage_units = {
+			province = 13385
+			#state = 5
+			#region = 5
+			org_damage = 0.1
+			str_damage = 0.1
+			ratio = yes
+			army = yes
+		}
+		damage_units = {
+			province = 13384
+			#state = 5
+			#region = 5
+			org_damage = 0.1
+			str_damage = 0.1
+			ratio = yes
+			army = yes
+		}
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_attrition = 0.10 tooltip = attrition_tt}
+		add_to_variable = { USA_black_mesa_incident_army_defence_factor = -0.10 tooltip = army_defence_factor_tt}
+
+		if = {
+			limit = {
+				has_country_flag = usa_lambda_labs_focused
+			}
+			country_event = { id = BMI.9 hours = 2 }
+		}
+		else = {
+			country_event = { id = BMI.10 hours = 2 }
+		}
+	}
+}
+
+#Canon route - Lambda Labs locked down
+country_event = {
+	id = BMI.9
+	title = BMI.9.t
+	desc = BMI.9.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.9.a
+
+		add_manpower = -1000
+
+		damage_units = {
+			province = 13385
+			#state = 5
+			#region = 5
+			org_damage = 0.3
+			str_damage = 0.3
+			ratio = yes
+			army = yes
+		}
+		damage_units = {
+			province = 13384
+			#state = 5
+			#region = 5
+			org_damage = 0.3
+			str_damage = 0.3
+			ratio = yes
+			army = yes
+		}
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_army_defence_factor = -0.10 tooltip = army_defence_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_army_attack_factor = -0.20 tooltip = army_attack_factor_tt}
+
+		country_event = { id = BMI.11 hours = 10 }
+	}
+}
+
+#Semi-Canon route - Sector C accesed, intel gained
+country_event = {
+	id = BMI.10
+	title = BMI.10.t
+	desc = BMI.10.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.10.a
+
+		set_country_flag = usa_sector_c_intel_gained #in full revamp, this would have consequences for Breen down the line, maybe even make his initial time as Combine Admin harder.
+
+		damage_units = {
+			province = 13385
+			#state = 5
+			#region = 5
+			org_damage = 0.1
+			str_damage = 0.1
+			ratio = yes
+			army = yes
+		}
+		damage_units = {
+			province = 13384
+			#state = 5
+			#region = 5
+			org_damage = 0.1
+			str_damage = 0.1
+			ratio = yes
+			army = yes
+		}
+
+		add_manpower = -1000
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_army_defence_factor = -0.10 tooltip = army_defence_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_army_attack_factor = -0.20 tooltip = army_attack_factor_tt}
+
+		country_event = { id = BMI.11 hours = 10 }
+	}
+}
+
+#Canon route - HECU being overwhelmed
+country_event = {
+	id = BMI.11
+	title = BMI.11.t
+	desc = BMI.11.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		#Code borrowed from SuperEvents.txt, except for BMI_news.3
+		set_global_flag = SE_cascade_resonance
+		set_country_flag = resonance_cascade_wasteland
+		set_global_flag = cascade_resonance
+		set_country_flag = rc_chainevent_active
+		hidden_effect = {
+			country_event = superevents.002
+			news_event = BMI_news.3
+			play_song = cascade_resonance_sound
+			USA = {
+				complete_national_focus = USA_unintended_consequences
+				set_country_flag = USA_cascade
+				set_country_flag = resonance_cascade_init
+				mark_focus_tree_layout_dirty = yes
+				set_province_controller = 13385
+				set_province_controller = 8070
+				set_province_controller = 13399
+				load_focus_tree = usa_cascade_tree
+			}
+			#Res. Cascade Exclusion Zone #
+			XEN = {
+				set_country_flag = firstxen_incursion
+				add_unit_bonus = {
+					category_all_infantry = {
+						soft_attack = 0.15
+						supply_consumption = -0.95
+						additional_collateral_damage = 0.15
+						hard_attack = 0.10
+					}
+				}
+				transfer_state = 985
+				transfer_state = 376
+				transfer_state = 1051
+				transfer_state = 1039
+				division_template = {
+					#override_model = headcrab_infected_entity
+					name = "Xen Creatures"
+					is_locked = yes
+					division_cap = 4 
+					priority = 0
+					template_counter = 107
+					regiments = {
+						headcrab_infected = { x = 0 y = 0 }
+						headcrab_infected = { x = 0 y = 1 }
+						headcrab_infected = { x = 0 y = 2 }
+						headcrab_infected = { x = 0 y = 3 }
+						headcrab = { x = 0 y = 4 }
+						headcrab = { x = 1 y = 0 }
+						headcrab = { x = 1 y = 1 }
+						headcrab = { x = 1 y = 2 }
+						headcrab = { x = 1 y = 3 }
+						headcrab = { x = 1 y = 4 }
+					}
+				}
+				declare_war_on = {
+					target = USA
+					type = annex_everything
+				}
+			} #end of Xen Scope
+			every_state = { #Xen State Scope
+				limit = {
+					OR = {
+						is_controlled_by = XEN
+						is_owned_by = XEN
+					}
+				}
+				create_unit = {
+					division = "name = \"Xenian Creatures\" division_template = \"Xen Creatures\" start_manpower_factor = 1"
+					owner = XEN
+					count = 20
+					allow_spawning_on_enemy_provs = no
+					id = 2003
+				}
+				set_building_level = {
+					type = quarantinezone
+					level = 1
+				}
+			} #End of Xen state scope
+			### Black Ops If Condition ###
+			if = {
+				limit = {
+					USA = {
+						has_country_flag = USA_black_ops_stationed_in_black_mesa
+					}
+				}
+				load_oob = "USA_blackops"
+				set_province_controller = 13385
+				set_province_controller = 13384
+			}
+			else = {
+				division_template = {
+					name = "MARSOC" 		
+					is_locked = yes
+					division_cap = 5
+					force_allow_recruiting = yes
+					division_names_group = USA_PRT_05
+					override_model = Special_Forces_entity
+					regiments = {
+						US_marsoc = { x = 0 y = 0 }
+						US_marsoc = { x = 0 y = 1 }
+						US_marsoc = { x = 0 y = 2 }
+						US_marsoc = { x = 0 y = 3 }
+						US_marsoc = { x = 1 y = 0 }
+						US_marsoc = { x = 1 y = 1 }
+						US_marsoc = { x = 1 y = 2 }
+						US_marsoc = { x = 1 y = 3 }
+						
+					}
+					support = {
+						rangers_support = { x = 0 y = 0 }
+						helicopter_transports = { x = 0 y = 1}
+						long_range_patrol_support = { x = 0 y = 2}
+						para_IFAV = { x = 0 y = 3 }
+						pioneer_support = { x = 0 y = 4 }
+					}
+					priority = 4
+				}
+				986 = {
+					create_unit = {
+						division = "name = \"MARSOC Detachment\" division_template = \"MARSOC\" start_manpower_factor = 1"
+						owner = USA
+						count = 1
+						allow_spawning_on_enemy_provs = yes
+						id = 105
+						prioritize_location = 13385
+					}
+				}
+			}
+			#Anarchy Country Scope - right now turned to Xen
+			XEN = {
+				transfer_state = 1039
+				transfer_state = 1058
+				division_template = {
+					#override_model = headcrab_infected_entity
+					name = "Xen Creatures"
+					is_locked = yes
+					division_cap = 6
+					priority = 0
+					template_counter = 107
+					regiments = {
+						headcrab_infected = { x = 0 y = 0 }
+						headcrab_infected = { x = 0 y = 1 }
+						headcrab_infected = { x = 0 y = 2 }
+						headcrab_infected = { x = 0 y = 3 }
+						headcrab = { x = 0 y = 4 }
+						headcrab = { x = 1 y = 0 }
+						headcrab = { x = 1 y = 1 }
+						headcrab = { x = 1 y = 2 }
+						headcrab = { x = 1 y = 3 }
+						headcrab = { x = 1 y = 4 }
+					}
+				}
+				declare_war_on = {
+					target = USA
+					type = annex_everything
+				}
+				declare_war_on = {
+					target = NCT
+					type = annex_everything
+				}
+			}
+			#ANR state scope
+			every_state = {
+				limit = {
+					is_owned_and_controlled_by = ANR
+				}
+				set_building_level = {
+					type = ruinedinfrastructure
+					level = 1
+				}
+				create_unit = {
+					division = "name = \"Anarchists and Rioters\" division_template = \"Anarchists and Rioters\" start_manpower_factor = 1"
+					owner = ANR
+					count = 3
+					allow_spawning_on_enemy_provs = yes
+					id = 105
+				}
+			}
+			#Xen Province Scope
+			set_victory_points = {
+				province = 7762
+				value = 5
+			}
+			set_province_name = {
+				name = "Xen Infestation Zone"
+				id = 7762
+			}
+			set_victory_points = {
+				province = 13810
+				value = 15
+			}
+			set_province_name = {
+				name = "Xen Infestation Zone"
+				id = 13810
+			}
+            NCT = {
+                division_template = {
+					name = "Headcrab Horde"
+					is_locked = no
+					division_cap = 25 
+					priority = 0
+					template_counter = 107
+					regiments = {
+						headcrab_infected = { x = 0 y = 0 }
+						headcrab_infected = { x = 0 y = 1 }
+						headcrab_infected = { x = 0 y = 2 }
+						headcrab_infected = { x = 0 y = 3 }
+						headcrab_infected = { x = 0 y = 4 }
+						headcrab_infected = { x = 1 y = 0 }
+						headcrab_infected = { x = 1 y = 1 }
+						headcrab_infected = { x = 1 y = 2 }
+						headcrab_infected = { x = 1 y = 3 }
+						headcrab_infected = { x = 1 y = 4 }
+					}
+				}
+				add_ideas = { unintelligent_species unidentified_species }
+			}
+
+			1083 = {
+				create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = NCT
+					count = 12
+					allow_spawning_on_enemy_provs = yes
+					id = 500
+				}
+			}
+
+			#USA Scope
+			USA = {
+				country_event = {
+					id = xencollapse.9
+					days = 10
+				}
+				country_event = {
+					id = usa.45
+					days = 5
+				}
+				country_event = {
+					id = usa.6
+					days = 12
+				}																	
+					add_ideas = USA_widespread_unrest
+					add_ideas = Xen_Invasion
+				}
+
+			#First Xen Incursion Scope 																																					
+			every_country = {
+				limit = {
+					NOT = {
+						tag = COM
+					}
+					OR = {
+						tag = USA
+						tag = MEX
+						tag = CAN
+					}
+				}
+				add_timed_idea = {
+					idea = Xen_Invasion
+					days = 365
+				}
+				add_ideas = high_inflation
+				set_global_flag = resonance_cascade
+				#Remember to add trade events
+			}
+			ROOT = {
+				country_event = {
+					id = xencollapse.22
+					days = 45
+				}
+				country_event = {
+					id = xencollapse.23
+					days = 65
+				}
+			}
+			USA = {
+				country_event = {
+					id = xencollapse.2 #Sinaloa CTL spawn, unit spawn, declare war on MEX
+					days = 15
+				}
+				country_event = {
+					id = xencollapse.3 #DDF unit spawn
+					days = 20
+				}
+				country_event = {
+					id = xencollapse.4 #Sinaloa, ANR, DDF spawn
+					days = 35
+				}
+				#check if player/USA completed mil focuses
+				if = {
+					limit = {
+						has_country_flag = USA_invested_in_specops
+					}
+					load_oob = "USA_blackops"
+				}
+				#check if player/USA completed mil focuses
+				if = {
+					limit = {
+						has_country_flag = USA_additional_hecu_forces 
+					}
+					division_template = {
+						name = "Hazardous Environment Containment Unit" 		
+						is_locked = yes
+						division_cap = 5
+						force_allow_recruiting = yes
+						division_names_group = USA_PRT_05
+
+						regiments = {
+							hecu = { x = 0 y = 0 }
+							hecu = { x = 0 y = 1 }
+							hecu = { x = 0 y = 2 }
+							hecu = { x = 1 y = 0 }
+							hecu = { x = 1 y = 1 }
+							hecu = { x = 1 y = 2 }
+							hecu = { x = 2 y = 0 }
+							hecu = { x = 2 y = 0 }
+							hecu = { x = 2 y = 1 }
+							hecu = { x = 2 y = 2 }
+						}
+						support = {
+							long_range_patrol_support = { x = 0 y = 0}
+							engineer = { x = 0 y = 1 }
+							helicopter_art = { x = 0 y = 2 }
+							helicopter_brigade = { x = 0 y = 3}
+							helicopter_transports = { x = 0 y = 4 }
+						}
+						priority = 1
+					}
+					986 = {
+						create_unit = {
+							division = "name = \"HECU Division\" division_template = \"Hazardous Environment Containment Unit\" start_manpower_factor = 1"
+							owner = USA
+							count = 2
+							allow_spawning_on_enemy_provs = yes
+							id = 2004
+							prioritize_location = 13385
+						}
+					}
+				}
+				#Begin Sinoloa conflict
+				CTL = {
+					declare_war_on = {
+						target = MEX
+						type = annex_everything
+					}
+				}
+				MEX = {
+					declare_war_on = {
+						target = XEN
+						type = annex_everything
+					}
+					country_event = {
+						id = xencollapse.15
+					days = 15
+					}
+				}
+			} #cleaned up the formatting of the code copied from superevents.002
+		} #end of hidden effect
+	} #Personally, I would handle a lot of this differently in a full revamp, more gradual spread of Xen and Resonance Cascade instead of all at once.
+
+	option = {
+		name = BMI.11.a
+
+		damage_units = {
+			province = 13385
+			#state = 5
+			#region = 5
+			org_damage = 0.3
+			str_damage = 0.3
+			ratio = yes
+			army = yes
+		}
+		damage_units = {
+			province = 13384
+			#state = 5
+			#region = 5
+			org_damage = 0.3
+			str_damage = 0.3
+			ratio = yes
+			army = yes
+		}
+
+		add_manpower = -2000
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.05 tooltip = political_power_gain_tt}
+		add_to_variable = { USA_black_mesa_incident_stability_factor = -0.05 tooltip = stability_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_army_defence_factor = -0.10 tooltip = army_defence_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_army_attack_factor = -0.10 tooltip = army_attack_factor_tt}
+
+		country_event = { id = BMI.12 hours = 4 }
+	}
+}
+
+#Canon route - Pulling out + "Forget about Freeman!"
+country_event = {
+	id = BMI.12
+	title = BMI.12.t
+	desc = BMI.12.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.12.a
+
+		add_political_power = -50
+		add_manpower = -5000
+
+		damage_units = {
+			province = 13385
+			#state = 5
+			#region = 5
+			org_damage = 0.4
+			str_damage = 0.4
+			ratio = yes
+			army = yes
+		}
+		damage_units = {
+			province = 13384
+			#state = 5
+			#region = 5
+			org_damage = 0.4
+			str_damage = 0.4
+			ratio = yes
+			army = yes
+		}
+
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.05 tooltip = political_power_gain_tt}
+		add_to_variable = { USA_black_mesa_incident_stability_factor = -0.05 tooltip = stability_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_army_defence_factor = -0.20 tooltip = army_defence_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_army_attack_factor = -0.20 tooltip = army_attack_factor_tt}
+
+		country_event = { id = BMI.13 hours = 20 }
+	}
+}
+
+#Canon route - Final solution
+country_event = {
+	id = BMI.13
+	title = BMI.13.t
+	desc = BMI.13.d
+	picture = GFX_black_mesa_sinkhole
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	#immediate = {
+	#}
+
+	option = {
+		name = BMI.13.a
+
+		add_political_power = -100
+		
+		USA_add_or_modify_black_mesa_incident = yes
+		add_to_variable = { USA_black_mesa_incident_political_power_gain = -0.05 tooltip = political_power_gain_tt}
+		add_to_variable = { USA_black_mesa_incident_research_speed_factor = -0.2 tooltip = research_speed_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_stability_factor = -0.05 tooltip = stability_factor_tt}
+		add_to_variable = { USA_black_mesa_incident_attrition = -0.10 tooltip = attrition_tt} #forces pulled out of meat grinder, no more maluses
+		add_to_variable = { USA_black_mesa_incident_army_defence_factor = 0.50 tooltip = army_defence_factor_tt} #forces pulled out of meat grinder, no more maluses
+		add_to_variable = { USA_black_mesa_incident_army_attack_factor = 0.50 tooltip = army_attack_factor_tt} #forces pulled out of meat grinder, no more maluses
+
+		news_event = BMI_news.4
+
+		#borrowed code from Usa.txt
+		launch_nuke = { 
+			province = 13385
+		}
+		985 = { 
+			set_state_name = "Black Mesa Containment Zone"   
+		}
+		hidden_effect = {
+			USA = { 
+				load_oob = "USA_blackops" 
+			}
+			set_province_name = { 
+				id = 13385 
+				name = "Black Mesa Ruins" 
+			}
+			goto_province = 13385
+			set_country_flag = USA_cascade
+			set_country_flag = USA_6_freeman
+			CAN = { 
+				declare_war_on = { 
+					target = XEN 
+					type = annex_everything 
+				}
+			}	
+			news_event = {
+					id = news_combine.48
+					days = 1 				
+			}
+			country_event = {
+				id = usa.116
+			}
+			USA = {
+				country_event = {
+					id = xencollapse.7
+					hours = 8
+				}
+				country_event = {
+					id = usa.23
+				}
+			}
+			XEN = { 
+				transfer_state = 314
+				transfer_state = 1039
+				transfer_state = 308
+				transfer_state = 968
+				division_template = {
+					name = "Headcrab Horde"
+					is_locked = no
+					division_cap = 25 
+					priority = 0
+					template_counter = 107
+						regiments = {
+						headcrab_infected = { x = 0 y = 0 }
+						headcrab_infected = { x = 0 y = 1 }
+						headcrab_infected = { x = 0 y = 2 }
+						headcrab_infected = { x = 0 y = 3 }
+						headcrab_infected = { x = 0 y = 4 }
+						headcrab_infected = { x = 1 y = 0 }
+						headcrab_infected = { x = 1 y = 1 }
+						headcrab_infected = { x = 1 y = 2 }
+						headcrab_infected = { x = 1 y = 3 }
+						headcrab_infected = { x = 1 y = 4 }
+					}
+				}
+			}
+			# Random State Anarchy Spawn  #
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = CAN
+						is_owned_and_controlled_by = USA
+						is_owned_and_controlled_by = MEX
+						NOT = {
+							state = 1082
+						}
+					}
+				}
+				transfer_state_to = XEN
+			}
+			random_state = {
+				limit = {
+					OR = {
+						is_owned_and_controlled_by = CAN
+						is_owned_and_controlled_by = MEX
+					}
+					NOT = {
+						state = 1082
+					}
+				}
+				transfer_state_to = XEN
+					create_unit = {
+					division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+					owner = XEN
+					count = 4
+					allow_spawning_on_enemy_provs = yes
+				}
+			}
+		}	
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = CAN
+					is_owned_and_controlled_by = USA
+					is_owned_and_controlled_by = MEX
+					NOT = {
+						state = 1082
+						state = 388
+						state = 389
+					}
+				}
+			}
+			transfer_state_to = XEN
+			create_unit = {
+				division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+				owner = XEN
+				count = 4
+				allow_spawning_on_enemy_provs = yes
+			}
+		}
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = PRU
+					is_owned_and_controlled_by = VEN
+					is_owned_and_controlled_by = BRA
+					NOT = {
+						state = 1082
+					}
+				}
+			}
+			transfer_state_to = XEN
+		}
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = CAN
+					is_owned_and_controlled_by = USA
+					is_owned_and_controlled_by = MEX
+					NOT = {
+						state = 1082
+						state = 388
+						state = 389
+					}
+				}
+			}
+			transfer_state_to = XEN
+			create_unit = {
+				division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+				owner = XEN
+				count = 4
+				allow_spawning_on_enemy_provs = yes
+			}
+		}
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = MEX
+				}
+				NOT = {
+					state = 1082
+				}
+			}
+			transfer_state_to = XEN
+		}
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = USA
+				}
+			}
+			transfer_state_to = XEN	
+		}
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = CAN
+				}
+		}
+			transfer_state_to = XEN
+		}				
+		random_state = {
+			limit = {
+				OR = {
+					is_owned_and_controlled_by = BRA
+				}
+			}
+			transfer_state_to = XEN
+			create_unit = {
+				division = "name = \"Headcrab Infected\" division_template = \"Headcrab Horde\" start_manpower_factor = 1"
+				owner = XEN
+				count = 4
+				allow_spawning_on_enemy_provs = yes
+			}
+		}
+	}
+}

@@ -1,0 +1,192 @@
+﻿add_namespace = superevents
+
+
+# Resonace Cascade
+country_event = {
+	id = superevents.002
+	title = superevents.002.t
+	desc = superevents.002.d
+	picture = GFX_Resonance_Cascade_Aftermath
+	
+	fire_only_once = yes
+	hidden = yes
+	is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 5
+	}
+	
+	immediate = {
+		news_event = news_combine.2
+		set_global_flag = SE_superevents_activate
+		#code moved to BMI.11
+	}
+}
+#seven hour war 
+
+country_event = {
+	id = superevents.003
+	title = superevents.2.t
+	desc = superevents.2.d
+	
+	trigger = {
+		NOT = {
+			has_global_flag = SE_superevents_activate
+		}
+		COM = {
+	    has_completed_focus = COM_invade_earth
+		}
+	}
+	
+	immediate = {
+		every_country = {
+		set_global_flag = SE_superevents_activate
+		}
+		USA = {
+			set_country_flag = resonance_cascade_SE
+		country_event = {
+            hours = 12
+		    id = usa.63
+		}
+		}
+		set_global_flag = SE_seven_hour_war
+		
+		play_song = seven_hour_war
+		
+	    every_country = {
+		    limit = {
+		        NOT = { 
+		            tag = COM
+					tag = WST
+					tag = XEN
+					tag = AFN
+					tag = ANR
+			    }
+		    }
+##			declare_war_on = {  #com don't need to declare war on everyone instantly since it will declare war on every country it borders with. And the game runs so much smoother without it
+##                    target = COM
+##                    type = annex_everything
+##                }
+		    add_timed_idea = {
+                idea = seven_hour_war_idea
+                days = 365
+            }
+		}
+		news_event = {
+            hours = 1
+		    id = news_combine.34
+		}
+	}
+
+	hidden = yes
+	fire_only_once = yes
+
+
+	
+	option = {
+		name = superevents.2.a
+	}
+}
+
+#uprising city17
+
+country_event = {
+	id = superevents.004
+	title = superevents.3.t
+	desc = superevents.3.d
+	
+	trigger = {
+		NOT = {
+			has_global_flag = SE_superevents_activate
+		}
+		has_global_flag = uprisingcity17
+	}
+		
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+
+	hidden = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_global_flag = SE_superevents_activate
+		set_global_flag = SE_uprising_city17
+		
+		play_song = uprising_city_17
+	}
+
+	
+	option = {
+		name = superevents.3.a
+	}
+}
+
+#liberation war
+
+country_event = {
+	id = superevents.005
+	title = superevents.4.t
+	desc = superevents.4.d
+	
+	trigger = {
+		NOT = {
+			has_global_flag = SE_usa_liberationwar
+		}
+		has_global_flag = UsaLiberationWar
+	}
+		
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+	}
+
+	hidden = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_global_flag = SE_superevents_activate
+		set_global_flag = SE_usa_liberationwar
+		
+		play_song = usaliberationsupervent
+	}
+
+	
+	option = {
+		name = superevents.4.a
+	}
+}
+
+#country_event = {
+#	id = superevents.004
+#	title = superevents.3.t
+#	desc = superevents.3.d
+#	
+#	trigger = {
+#		NOT = {
+#			has_global_flag = SE_superevents_activate
+#		}
+#	}
+#	
+#	immediate = {
+#		set_global_flag = SE_superevents_activate
+#		set_global_flag = SE_earth_surrender
+#		
+#		sound_effect = earth_surrender
+#	}
+#
+#	hidden = yes
+#	
+#	fire_only_once = no
+#
+#	is_triggered_only = yes
+#	
+#	option = {
+#		name = superevents.3.a
+#	}
+#}

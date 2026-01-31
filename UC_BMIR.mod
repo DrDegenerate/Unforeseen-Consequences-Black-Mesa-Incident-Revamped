@@ -1,0 +1,11 @@
+version="1.0"
+tags={
+	"Events"
+	"Balance"
+}
+name="UC: Black Mesa Incident Revamped"
+dependencies={
+	"Unforeseen Consequences - Demo"
+}
+supported_version="1.17.3.0"
+path="C:/Users/Dr.D/Documents/Paradox Interactive/Hearts of Iron IV/mod/UC_BMIR"

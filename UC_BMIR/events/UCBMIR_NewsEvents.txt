@@ -1,0 +1,77 @@
+###################################
+# Black Mesa Incident News Events #
+###################################
+
+add_namespace = BMI_news
+
+# "Minor Nuclear Accident"
+news_event = {
+	id = BMI_news.1
+	title = BMI_news.1.t
+	desc = BMI_news.1.d
+	picture = GFX_resonance_cascade
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = BMI_news.1.a
+	}
+}
+
+# "Expanded Exclusion Zone"
+news_event = {
+	id = BMI_news.2
+	title = BMI_news.2.t
+	desc = BMI_news.2.d
+	picture = GFX_resonance_cascade
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = BMI_news.2.a
+	}
+}
+
+# "Hostile Force Declared Present"
+news_event = {
+	id = BMI_news.3
+	title = BMI_news.3.t
+	desc = BMI_news.3.d
+	picture = GFX_resonance_cascade
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = BMI_news.3.a
+	}
+}
+
+# "Nuclear Detonation at Black Mesa"
+news_event = {
+	id = BMI_news.4
+	title = BMI_news.4.t
+	desc = BMI_news.4.d
+	picture = GFX_resonance_cascade
+	
+	major = yes
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = BMI_news.4.a
+	}
+}

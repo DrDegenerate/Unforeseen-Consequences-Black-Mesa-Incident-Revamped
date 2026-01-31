@@ -1,0 +1,29 @@
+USA_black_mesa_modifier = {
+	icon = USA_blackmesa
+	enable = { always = yes }
+	#remove_trigger = {
+	#}
+
+	consumer_goods_factor = USA_black_mesa_consumer_goods_factor
+	political_power_gain = USA_black_mesa_political_power_gain
+	research_speed_factor = USA_black_mesa_research_speed_factor
+	nuclear_production_factor = USA_black_mesa_nuclear_production_factor
+	military_factory_donations = USA_black_mesa_military_factory_donations
+	intel_from_combat_factor = USA_black_mesa_intel_from_combat_factor
+
+}
+
+USA_black_mesa_incident_modifier = {
+	icon = USA_blackmesa
+	enable = { always = yes }
+	#remove_trigger = {
+	#}
+
+	political_power_gain = USA_black_mesa_incident_political_power_gain
+	research_speed_factor = USA_black_mesa_incident_research_speed_factor
+	stability_factor = USA_black_mesa_incident_stability_factor
+	attrition = USA_black_mesa_incident_attrition
+	army_defence_factor = USA_black_mesa_incident_army_defence_factor
+	army_attack_factor = USA_black_mesa_incident_army_attack_factor
+
+}

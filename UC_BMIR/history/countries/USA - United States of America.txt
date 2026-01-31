@@ -1,0 +1,639 @@
+﻿capital = 1089
+oob = "USA_STRANGE_TIMES_OOB"
+
+starting_train_buffer = 3
+
+set_research_slots = 3
+add_command_power = 20
+set_political_power = 35
+
+	give_guarantee = ISR
+	give_guarantee = CHI
+	give_guarantee = KOR
+	give_guarantee = GER
+	give_guarantee = JAP
+
+set_convoys = 250
+
+set_country_flag = startup_information_country_info
+
+set_politics = {
+	ruling_party = social_liberalism
+	last_election = "1996.11.8"
+	election_frequency = 48
+	elections_allowed = yes
+}
+set_popularities = {
+	conservatism = 45
+	social_liberalism = 48
+	authoritarian_democracy = 3
+	communism = 2
+	despotism = 2
+}
+
+add_opinion_modifier = {
+	target = IRQ
+	modifier = USA_non_democratic_relations_modifier
+}
+add_opinion_modifier = {
+	target = PER
+	modifier = USA_non_democratic_relations_modifier
+}
+add_opinion_modifier = {
+	target = LBA
+	modifier = USA_non_democratic_relations_modifier
+}
+add_opinion_modifier = {
+	target = NOK
+	modifier = USA_non_democratic_relations_modifier
+}
+add_opinion_modifier = {
+	target = CUB
+	modifier = USA_non_democratic_relations_modifier
+}
+
+add_opinion_modifier = {
+	target = PRC
+	modifier = USA_sancions_relations_modifier
+}
+add_opinion_modifier = {
+	target = TAB
+	modifier = USA_sancions_relations_modifier
+}
+add_opinion_modifier = {
+	target = BLR
+	modifier = USA_sancions_relations_modifier
+}
+
+send_embargo = CUB
+send_embargo = SYR
+send_embargo = PER
+send_embargo = NOK
+
+give_market_access = CAN
+give_market_access = MEX
+give_market_access = ISR
+give_market_access = GER
+give_market_access = FRA
+give_market_access = ENG
+give_market_access = SPR
+give_market_access = BEL
+give_market_access = HOL
+give_market_access = LUX
+give_market_access = AST
+give_market_access = JAP
+give_market_access = KOR
+
+add_opinion_modifier = {
+	target = CAN
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = MEX
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = ISR
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = FRA
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = GER
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = ENG
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = JAP
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = KOR
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = AST
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = NZL
+	modifier = USA_start_relations_modifier
+}
+add_opinion_modifier = {
+	target = SAU
+	modifier = USA_start_relations_modifier
+}
+add_ideas = {
+    civilian_economy
+	volunteer_only
+	free_trade
+}
+
+set_war_support = 0.23
+set_stability = 0.62
+
+add_equipment_to_stockpile = {
+	type = amphibious_mechanized_equipment_1
+	amount = 1500
+}
+add_equipment_to_stockpile = {
+	type = guided_missile_equipment_3
+	amount = 250
+}
+add_equipment_to_stockpile = {
+	type = amphibious_tank_equipment_1
+	amount = 500
+}
+add_equipment_to_stockpile = {
+	type = mechanized_equipment_1
+	amount = 1400
+}
+add_equipment_to_stockpile = {
+	type = infantry_equipment_1
+	amount = 8500
+}
+add_equipment_to_stockpile = {
+	type = advanced_medium_tank
+	amount = 1500
+}
+add_equipment_to_stockpile = {
+	type = modern_tank_artillery_equipment_1
+	amount = 2900
+}
+add_equipment_to_stockpile = {
+	type = modern_tank_aa_equipment_1
+	amount = 1900
+}
+add_equipment_to_stockpile = {
+	type = modern_tank_destroyer_equipment_1
+	amount = 780
+}
+add_equipment_to_stockpile = {
+	type = modern_tank_equipment_1
+	amount = 280
+}
+add_equipment_to_stockpile = {
+	type = light_tank_equipment_1
+	amount = 500
+}
+add_equipment_to_stockpile = {
+	type = rocket_artillery_equipment_2
+	amount = 500
+}
+2000.1.1 = {
+
+    create_faction = NATO
+    add_to_faction = CAN
+    add_to_faction = POR
+    add_to_faction = SPR
+    add_to_faction = FRA
+    add_to_faction = ENG
+    add_to_faction = GER
+    add_to_faction = BEL
+    add_to_faction = HOL
+    add_to_faction = LUX
+    add_to_faction = ITA
+    add_to_faction = POL
+    add_to_faction = CZE
+    add_to_faction = HUN
+    add_to_faction = NOR
+    add_to_faction = GRE
+    add_to_faction = TUR 
+    add_to_faction = DEN
+	add_to_faction = ICE
+
+if = { #Those who do NOT have the No Step Back DLC
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		main_battle_tank = 1
+		advanced_medium_tank = 1		
+		modern_armor1 = 1
+		tank_ammo1 = 1
+		IFV = 1
+		IFV_2 = 1
+		fire_support_vehicle1 = 1
+		cold_war_light_tank = 1	
+		amphibious_tank = 1	
+	}
+}	
+if = { #those who have the No Step Back DLC
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		advanced_medium_tank_chassis = 1
+		main_battle_tank_chassis = 1
+		infantry_fight_vehicle_0 = 1
+		infantry_fight_vehicle_1 = 1
+		cold_war_light_tanks_chassis = 1
+		weapons_tech = 1
+		amphibious_tank_chassis = 1		
+	}
+	create_equipment_variant = {
+		name = "M1128"
+		type = modern_tank_destroyer_chassis_1
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_cannon
+			turret_type_slot = tank_modern_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 2
+			tank_nsb_engine_upgrade = 5
+		}
+		icon = "GFX_USA_fire_support_vehicle1_medium"
+	}
+	create_equipment_variant = {
+		name = "M1 Abrams"
+		type = modern_tank_chassis_1
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_cannon_3
+			turret_type_slot = tank_modern_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 2
+			tank_nsb_engine_upgrade = 5
+		}
+		icon = "GFX_USA_main_battle_tank_chassis_medium"
+	}
+	create_equipment_variant = {
+		name = "M511 Sheridam"
+		type = light_tank_chassis_3
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_small_cannon_2
+			turret_type_slot = tank_light_three_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 2
+			tank_nsb_engine_upgrade = 5
+		}
+		icon = "GFX_USA_cold_war_light_tanks_chassis_medium"
+	}
+	create_equipment_variant = {
+		name = "AAVP7A1"
+		type = amphibious_tank_chassis_1
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_heavy_machine_gun
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 2
+			tank_nsb_engine_upgrade = 5
+		}
+		icon = "GFX_USA_amphibious_tank_chassis_medium"
+	}
+	create_equipment_variant = {
+		name = "M2 Bradley"
+		type = IFV_chassis_1
+		parent_version = 0
+		modules = {
+			main_armament_slot = tank_auto_cannon
+			turret_type_slot = tank_light_two_man_tank_turret
+			suspension_type_slot = tank_bogie_suspension
+			armor_type_slot = tank_riveted_armor
+			engine_type_slot = tank_gasoline_engine
+			special_type_slot_1 = tank_radio_1
+		}
+		upgrades = {
+			tank_nsb_armor_upgrade = 2
+			tank_nsb_engine_upgrade = 5
+		}
+		icon = "GFX_USA_infantry_fight_vehicle_1_medium"
+	}					
+}
+
+if = { #Those who have the By Blood Alone DLC
+	limit = { 
+		has_dlc = "By Blood Alone"
+	}
+	set_air_oob = "USA_AIR_WING_2000_OOB_BBA"	
+	set_technology = {
+		iw_small_airframe = 1
+		basic_small_airframe = 1
+		iw_medium_airframe = 1
+		basic_medium_airframe = 1
+		engines_1 = 1
+		engines_2 = 1
+		aa_lmg = 1
+		early_bombs = 1
+		aircraft_construction = 1
+		air_torpedoe_1 = 1
+		bba_early_transport_plane = 1
+		iw_large_airframe = 1
+		basic_large_airframe = 1
+		cw_helicopter = 1
+		light_helicopter2 = 1
+		heavy_attack_helicopter_tech1 = 1
+	}
+	create_equipment_variant = { #cold war fighter
+		name = "F-4E Phatom II"
+		type = iw_small_airframe
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
+		}
+		obsolete = yes
+		icon = "GFX_USA_iw_small_airframe_medium"
+	}
+	create_equipment_variant = { #2000 fighter
+		name = "F-16 Fighting Falcon"
+		type = small_plane_airframe_1
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			fixed_auxiliary_weapon_slot_1 = heavy_mg_2x
+			engine_type_slot = engine_2_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_USA_basic_small_airframe_medium"
+	}
+	create_equipment_variant = { #2000 CAS
+		name = "A-10 Thunderbolt II (Warthog)"
+		type = small_plane_cas_airframe_1
+		modules = {
+			fixed_main_weapon_slot = small_bomb_bay
+			fixed_auxiliary_weapon_slot_1 = light_mg_4x
+			engine_type_slot = engine_2_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_USA_CAS1_medium"
+	}
+	create_equipment_variant = { #2000 Interceptor/heavy Fighter
+		name = "F-106 Delta Dart"
+		type = medium_plane_fighter_airframe_1
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			fixed_auxiliary_weapon_slot_1 = heavy_mg_2x
+			engine_type_slot = engine_3_2x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_USA_heavy_fighter1_medium"
+	}
+	create_equipment_variant = { #2000 Tactical Bomber
+		name = "F-111F Aardvark" #
+		type = medium_plane_airframe_1
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_2_2x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_USA_basic_medium_airframe_medium"
+	}
+	create_equipment_variant = { #2000 Strategic Bomber
+		name = "B52H Stratofortress" #
+		type = large_plane_airframe_1
+		modules = {
+			fixed_main_weapon_slot = large_bomb_bay
+			engine_type_slot = engine_4_6x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_USA_basic_large_airframe_medium"
+	}								 
+}
+if = { #Those who do NOT have the By Blood Alone DLC
+	limit = {
+		NOT = { has_dlc = "By Blood Alone" }
+	}
+	set_air_oob = "USA_AIR_WING_2000_OOB"	
+	set_technology = {
+		early_fighter = 1
+		early_bomber = 1		
+		helicopter_tech1 = 1
+		helicopter_tech2 = 1
+		attack_helicopter_tech1 = 1
+		fighter1 = 1
+		CAS1 = 1
+		heavy_fighter1 = 1
+		tactical_bomber1 = 1
+		strategic_bomber1 = 1	
+	}
+}	
+	
+	set_technology = {
+		tech_recon = 1
+		advanced_modern_tank_turret_tech = 1
+		anti_tank_weapons_1 = 1
+		anti_air_weapons = 1
+		motorized_rocket_unit = 1
+		rocket_artillery = 1
+		rocket_artillery2 = 1
+		rocket_artillery3 = 1
+		basic_battery = 1
+		modern_art = 1
+		amphibious_mechanized_infantry = 1
+		anti_tank_weapons = 1
+		tech_support = 1
+		tech_recon = 1
+		support_weapons = 1
+		gw_artillery = 1
+		mechanised_infantry0 = 1
+		mechanised_infantry = 1
+		infantry_weapons = 1
+		experimental_rockets = 1
+		jet_engines = 1
+		improved_decimetric_radar = 1
+		infantry_weapons1 = 1
+		tech_trucks = 1
+		tech_engineers = 1
+		interwar_antiair = 1
+		sp_anti_air = 1
+		sp_artillery1 = 1	
+		MRLS_artillery1 = 1	
+		armored_vehicle0 = 1
+		armored_car1 = 1
+		superior_firepower = 1
+		base_strike = 1
+		motorised_infantry = 1
+		fuel_silos = 1
+		fuel_refining = 1
+		marines = 1
+		basic_train = 1
+		engine_tech_1 = 1
+		nuclear_reactor = 1
+		nuclear_reactor = 1
+		thermonuclear_bombs = 1
+		#doctrines
+		air_superiority = 1
+		grand_battle_plan = 1
+		trench_warfare = 1
+		fleet_in_being = 1
+		battlefleet_concentration = 1
+		convoy_sailing = 1
+		rocket_engines = 1
+		improved_rocket_engines = 1
+		advanced_rocket_engines = 1
+		#electronics
+		electronic_mechanical_engineering = 1
+		radio = 1
+		radio_detection = 1
+		mechanical_computing = 1
+		computing_machine = 1
+		decimetric_radar = 1
+		improved_automation_lines = 1
+		synth_oil_experiments = 1
+		#industry
+		basic_machine_tools = 1
+	}	
+	
+	set_politics = {
+		ruling_party = social_liberalism
+		last_election = "1996.11.07"
+		election_frequency = 48
+		elections_allowed = yes
+	}
+	
+	create_country_leader = {
+		name = "Bill Clinton"
+		desc = "Born January 20, 1946 Bill Clinton\n\n Bill Clinton, or William Jefferson Clinton, was the son of a traveling salesman who tragically died in an automobile accident three months before his birth.\n\n Clinton attended the School of Foreign Service at Georgetown University, graduating with a Bachelor of Science in Foreign Service in 1968. He later attended Yale Law School, earning his law degree in 1973. He began his political career as a campaign coordinator for George McGovern during the 1972 presidential election.\n\n In 1978, Clinton was elected Governor of Arkansas after defeating his Republican opponent. At the time, he was the youngest governor in the country and one of the youngest in Arkansas’ history. He served a two-year term, during which he passed a mixed series of reforms.\n\n Bill Clinton won the presidency in 1992, defeating incumbent George H.W. Bush. His victory was largely attributed to Bush’s broken pledges, a focus on economic reform, and Clinton’s natural charisma. He was 46 years old at the time.\n\n He won re-election in 1996, benefiting from a strong economy, budget surpluses, and bipartisan cooperation with Republicans on welfare reform and law enforcement policies.\n\n Despite his political success, Clinton was embroiled in several scandals, most notably affairs that led to controversy and impeachment proceedings. His most infamous scandal involved his relationship with White House intern Monica Lewinsky, which resulted in his impeachment in 1998. However, he was acquitted by the Senate in 1999 and completed his second term."
+		picture = "Bill_Clinton.dds"
+		ideology = neo_liberalism_subtype
+		traits = {
+			#
+		}
+	}
+    recruit_character = USA_George_Bush
+    recruit_character = USA_Albert_Gore
+    recruit_character = USA_George_Bush
+    recruit_character = USA_Albert_Gore
+	recruit_character = USA_freddy_McFarren2
+	
+	recruit_character = USA_richard_myers	
+	recruit_character = USA_tommy_franks
+	recruit_character = USA_erick_shinseki
+	recruit_character = USA_george_william
+	recruit_character = USA_Robert_Noonan
+	recruit_character = USA_Peter_Cuviello
+	recruit_character = USA_John_Abizaid
+	recruit_character = USA_James_Peake
+	recruit_character = USA_Freddy_McFarren
+	recruit_character = USA_Timothy_Maude
+
+	recruit_character = USA_Madeleine_Albright
+	recruit_character = USA_Colin_Powell
+	recruit_character = USA_Condoleezza_Rice
+	recruit_character = USA_Hillary_Clinton
+	recruit_character = USA_Robert_Rubin
+	recruit_character = USA_Lawrence_Summers
+	recruit_character = USA_Paul_ONeill
+	recruit_character = USA_John_Snow
+	recruit_character = USA_Timothy_Geithner
+	recruit_character = USA_Bruce_Babbitt
+	recruit_character = USA_Thomas_Slonaker
+	recruit_character = USA_Gale_Norton
+	recruit_character = USA_Lynn_Scarlett
+	recruit_character = USA_Dan_Glickman
+	recruit_character = USA_Ann_Veneman
+	recruit_character = USA_Mike_Johanns
+	recruit_character = USA_Ed_Schafer
+	recruit_character = USA_Tom_Vilsack
+	recruit_character = USA_Janet_Reno
+	recruit_character = USA_John_Ashcroft
+	recruit_character = USA_Alberto_Gonzales
+	recruit_character = USA_Michael_Mukasey
+	recruit_character = USA_Eric_Holder
+	recruit_character = USA_William_Daley
+	recruit_character = USA_Norman_Mineta
+	recruit_character = USA_Donald_Evans
+	recruit_character = USA_Carlos_Gutierrez
+	recruit_character = USA_Gary_Locke
+	recruit_character = USA_Donald_Trump
+	recruit_character = USA_Robert_Reich
+	recruit_character = USA_Alexis_Herman
+	recruit_character = USA_Elaine_Chao
+	recruit_character = USA_Hilda_Solis
+	recruit_character = USA_William_Cohen
+	recruit_character = USA_Donald_Rumsfeld
+	recruit_character = USA_Robert_Gates
+	recruit_character = USA_Dick_Cheney
+	recruit_character = USA_Les_Aspin
+	recruit_character = USA_William_Taft
+	recruit_character = USA_Donna_Shalala
+	recruit_character = USA_Tommy_Thompson
+	recruit_character = USA_Mike_Leavitt
+	recruit_character = USA_Robert_Kennedy
+	recruit_character = USA_Andrew_Cuomo
+	recruit_character = USA_Mel_Martinez
+	recruit_character = USA_Alphonso_Jackson
+	recruit_character = USA_Steve_Preston
+	recruit_character = USA_Shaun_Donovan
+	recruit_character = USA_Rodney_Slater
+	recruit_character = USA_Norman_Mineta
+	recruit_character = USA_Mary_Peters
+	recruit_character = USA_Ray_LaHood
+	recruit_character = USA_Bill_Richardson
+	recruit_character = USA_Spencer_Abraham
+	recruit_character = USA_Samuel_Bodman
+	recruit_character = USA_Steven_Chu
+	recruit_character = USA_Richard_Riley
+	recruit_character = USA_Rod_Paige
+	recruit_character = USA_Margaret_Spellings
+	recruit_character = USA_Arne_Duncan
+	recruit_character = USA_Togo_West
+	recruit_character = USA_Anthony_Principi
+	recruit_character = USA_Jim_Nicholson
+	recruit_character = USA_Eric_Shinseki
+	recruit_character = USA_Tom_Ridge
+	recruit_character = USA_Michael_Chertoff
+	recruit_character = USA_Janet_Napolitano
+	recruit_character = USA_James_Loy
+	recruit_character = USA_William_Afton
+
+	add_nuclear_bombs = 95
+	
+	
+	
+	# ███████╗██╗     ███████╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+	# ██╔════╝██║     ██╔════╝██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+	# █████╗  ██║     █████╗  ██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+	# ██╔══╝  ██║     ██╔══╝  ██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+	# ███████╗███████╗███████╗╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+	# ╚══════╝╚══════╝╚══════╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+	
+	#common/scripted_effects/USA_scripted_effects.txt
+	
+	USA_elections_setup_start_situation = yes
+	USA_elections_calculate_variables = yes
+
+	#Black Mesa Dynamic Modifier
+	set_variable = { USA_black_mesa_consumer_goods_factor = 0 } 
+	set_variable = { USA_black_mesa_political_power_gain = 0 } 
+	set_variable = { USA_black_mesa_research_speed_factor = 0 } 
+	set_variable = { USA_black_mesa_nuclear_production_factor = 0 } 
+	set_variable = { USA_black_mesa_military_factory_donations = 0 } 
+	set_variable = { USA_black_mesa_intel_from_combat_factor = 0 } 
+
+	#Black Mesa Incident Dynamic Modifier
+	set_variable = { USA_black_mesa_incident_political_power_gain = 0 } 
+	set_variable = { USA_black_mesa_incident_research_speed_factor = 0 } 
+	set_variable = { USA_black_mesa_incident_stability_factor = 0 } 
+	set_variable = { USA_black_mesa_incident_attrition = 0 } 
+	set_variable = { USA_black_mesa_incident_army_defence_factor = 0 }
+	set_variable = { USA_black_mesa_incident_army_attack_factor = 0 }
+
+}
